@@ -14,7 +14,6 @@ import TopRankings from "../homeComponents/TopRankings";
 import NewArrivals from "../homeComponents/NewArivals";
 import ProductList from "../homeComponents/ProductList";
 import { router } from "expo-router";
-import Chat from "../homeComponents/Chat";
 
 interface Product {
   createdAt: string;
@@ -36,7 +35,6 @@ const Home: React.FC = () => {
     { key: "topRankings", component: <TopRankings /> },
     { key: "newArrivals", component: <NewArrivals /> },
     { key: "productList", component: <ProductList /> },
-    { key: "chat", component: <Chat /> },
   ];
   const handleDetails = (item: Product) => {
     // Navigate to the product details page

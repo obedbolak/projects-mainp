@@ -88,7 +88,7 @@ const ProductProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const fetchProducts = async () => {
     try {
       const response = await fetch(
-        "https://preeminent-macaron-3cd7d6.netlify.app/.netlify/functions/api/v1/product/get-all"
+        "http://16.16.151.246:8080/api/v1/product/get-all"
       );
 
       if (!response.ok) {

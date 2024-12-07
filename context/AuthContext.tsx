@@ -99,7 +99,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const signIn = async (email: string, password: string) => {
     try {
       const response = await axios.post(
-        "https://preeminent-macaron-3cd7d6.netlify.app/.netlify/functions/api/v1/user/login",
+        "http://16.16.151.246:8080/api/v1/user/login",
         {
           email,
           password,
@@ -147,7 +147,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   ) => {
     try {
       const response = await axios.post(
-        "https://preeminent-macaron-3cd7d6.netlify.app/.netlify/functions/api/v1/user/register",
+        "http://16.16.151.246:8080/api/v1/user/register",
         {
           name,
           email,

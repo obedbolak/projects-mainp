@@ -51,7 +51,6 @@ const ProductItem: React.FC<{
 );
 
 const TopRankings: React.FC = () => {
-  const context = useContext(ProductContext);
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

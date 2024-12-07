@@ -14,14 +14,14 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.cebexpodevteam.onemarkets"
+      "bundleIdentifier": ""
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.cebexpodevteam.onemarkets"
+      "package": "com.zyrumy.onemarkets"
     },
     "web": {
       "bundler": "metro",
@@ -43,12 +43,11 @@
     },
     "extra": {
       "eas": {
-        "projectId": "16ea9c83-abc0-4eec-9de9-842a99bed71d"
+        "projectId": "b27e8115-05f6-48bf-a5c5-f4e32f4204c0"
+      },
+      "router": {
+        "origin": false
       }
-    },
-    "owner": "cebexpodevteam",
-    "updates": {
-      "url": "https://u.expo.dev/16ea9c83-abc0-4eec-9de9-842a99bed71d"
     },
     "runtimeVersion": {
       "policy": "appVersion"
