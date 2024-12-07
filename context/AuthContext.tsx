@@ -52,25 +52,25 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   useEffect(() => {
     const checkAuthStatus = async () => {
       const token = await SecureStore.getItemAsync("authToken");
+
+      // Allow access to the home page regardless of authentication
+      if (segments[0] === "home") {
+        return; // Skip any redirect if we're already on the home page
+      }
+
       if (token) {
-        const userData = await SecureStore.getItemAsync("userData"); // Retrieve user data
+        const userData = await SecureStore.getItemAsync("userData");
 
         if (userData) {
           setIsAuthenticated(true);
           setUserProfile(JSON.parse(userData)); // Set user profile from secure storage
-          const parsedUserData = JSON.parse(userData);
-          setUserProfile(parsedUserData);
-          dispatch(setUserId(parsedUserData._id));
-          // Dispatch user ID
-
-          router.replace("/(tabs)/home");
+          dispatch(setUserId(JSON.parse(userData)._id)); // Dispatch user ID
         } else {
-          // Fetch user data from API if not found in secure storage
           try {
             const response = await axios.get(
               "https://preeminent-macaron-3cd7d6.netlify.app/.netlify/functions/api/v1/user/profile",
               {
-                headers: { Authorization: `Bearer ${token}` }, // Include token for authorization
+                headers: { Authorization: `Bearer ${token}` },
               }
             );
 
@@ -78,23 +78,20 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
               await SecureStore.setItemAsync(
                 "userData",
                 JSON.stringify(response.data.user)
-              ); // Store fetched user data
+              );
               setUserProfile(response.data.user);
-              dispatch(setUserId(response.data.user._id)); // Dispatch user ID
-              // Set user profile state
+              dispatch(setUserId(response.data.user._id));
               setIsAuthenticated(true);
-              router.replace("/(tabs)/home");
             }
           } catch (error) {
             console.error("Failed to fetch user data:", error);
-            // Optionally handle errors (e.g., sign out user or alert them)
           }
         }
       }
     };
 
     checkAuthStatus();
-  }, []);
+  }, [segments]); // Add segments as a dependency to detect route changes
 
   const signIn = async (email: string, password: string) => {
     try {
@@ -175,9 +172,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     const rootSegment = segments[0];
 
     if (!isAuthenticated && rootSegment !== "auth") {
-      router.replace("/auth/SignIn");
+      router.replace("/home");
     } else if (isAuthenticated && rootSegment === "") {
-      router.replace("/(tabs)/home");
+      router.replace("/home");
     }
   }, [isAuthenticated, segments, router]);
 
